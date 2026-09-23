@@ -12,8 +12,8 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.6;
-      color: #1a1a1a;
-      background: #0d0d0d;
+      color: var(--text);
+      background: var(--bg);
       overflow-x: hidden;
     }
     img { max-width: 100%; height: auto; display: block; }
@@ -21,17 +21,22 @@
     button, input, textarea { font-family: inherit; }
     ul { list-style: none; }
 
-    /* ========== PALETA: PRETO + AMARELO ========== */
+    /* ========== PALETA: AMARELO + BRANCO + LARANJA (contraste) ========== */
     :root {
-      --black: #0d0d0d;
-      --black-soft: #1a1a1a;
-      --black-card: #222222;
+      --bg: #ffffff;
+      --bg-soft: #fffbeb;
+      --bg-card: #ffffff;
       --yellow: #fbbf24;
       --yellow-hover: #f59e0b;
-      --yellow-light: #fcd34d;
+      --yellow-light: #fef3c7;
+      --orange: #ea580c;
+      --orange-hover: #c2410c;
+      --orange-light: #ffedd5;
+      --text: #1a1a1a;
+      --text-muted: #6b7280;
+      --border: #e5e7eb;
       --white: #ffffff;
-      --gray: #b0b0b0;
-      --gray-light: #e8e8e8;
+      --dark: #0d0d0d;
     }
 
     /* ========== UTILITIES ========== */
@@ -46,8 +51,8 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      background: var(--yellow);
-      color: #0d0d0d;
+      background: var(--orange);
+      color: var(--white);
       font-weight: 700;
       font-size: 1rem;
       padding: 14px 28px;
@@ -56,25 +61,25 @@
       cursor: pointer;
       transition: background 0.2s, transform 0.15s;
     }
-    .btn:hover { background: var(--yellow-hover); transform: translateY(-1px); }
+    .btn:hover { background: var(--orange-hover); transform: translateY(-1px); }
     .btn:active { transform: translateY(0); }
     .btn-outline {
       background: transparent;
-      border: 2px solid var(--yellow);
-      color: var(--yellow);
+      border: 2px solid var(--orange);
+      color: var(--orange);
     }
-    .btn-outline:hover { background: var(--yellow); color: #0d0d0d; }
+    .btn-outline:hover { background: var(--orange); color: var(--white); }
     .section { padding: 64px 0; }
     .section-title {
       font-size: clamp(1.6rem, 4vw, 2.2rem);
       font-weight: 800;
-      color: var(--white);
+      color: var(--text);
       text-align: center;
       margin-bottom: 12px;
     }
     .section-sub {
       text-align: center;
-      color: var(--gray);
+      color: var(--text-muted);
       max-width: 560px;
       margin: 0 auto 40px;
       font-size: 1.05rem;
@@ -85,9 +90,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(13,13,13,0.92);
+      background: rgba(255,255,255,0.95);
       backdrop-filter: blur(10px);
-      border-bottom: 1px solid #2a2a2a;
+      border-bottom: 1px solid var(--border);
     }
     .header-inner {
       display: flex;
@@ -98,41 +103,79 @@
     .logo {
       font-size: 1.35rem;
       font-weight: 800;
-      color: var(--white);
+      color: var(--text);
       letter-spacing: -0.5px;
     }
-    .logo span { color: var(--yellow); }
+    .logo span { color: var(--orange); }
     .header-cta { font-size: 0.9rem; padding: 10px 20px; }
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .tab-nav {
+      display: flex;
+      gap: 4px;
+      background: var(--bg-soft);
+      padding: 4px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active {
+      background: var(--orange);
+      color: var(--white);
+    }
+    .aba-panel { display: none; }
+    .aba-panel.active { display: block; }
+    @media (max-width: 700px) {
+      .header-inner { flex-wrap: wrap; gap: 10px; }
+      .header-nav { width: 100%; justify-content: space-between; }
+      .tab-btn { font-size: 0.8rem; padding: 8px 10px; }
+      .header-cta { font-size: 0.8rem; padding: 8px 12px; }
+    }
 
     /* ========== HERO ========== */
     .hero {
       padding: 72px 0 56px;
-      background: linear-gradient(180deg, #141414 0%, #0d0d0d 100%);
+      background: linear-gradient(180deg, var(--yellow-light) 0%, var(--bg) 100%);
       text-align: center;
     }
     .hero-badge {
       display: inline-block;
-      background: rgba(251,191,36,0.15);
-      color: var(--yellow);
+      background: var(--orange-light);
+      color: var(--orange);
       font-size: 0.85rem;
       font-weight: 600;
       padding: 6px 14px;
       border-radius: 50px;
       margin-bottom: 20px;
-      border: 1px solid rgba(251,191,36,0.3);
+      border: 1px solid var(--orange);
     }
     .hero h1 {
       font-size: clamp(1.9rem, 5.5vw, 3rem);
       font-weight: 800;
-      color: var(--white);
+      color: var(--text);
       line-height: 1.2;
       max-width: 720px;
       margin: 0 auto 18px;
     }
-    .hero h1 span { color: var(--yellow); }
+    .hero h1 span { color: var(--orange); }
     .hero-sub {
       font-size: 1.15rem;
-      color: var(--gray);
+      color: var(--text-muted);
       max-width: 560px;
       margin: 0 auto 32px;
     }
@@ -147,20 +190,21 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: var(--black-card);
-      color: var(--gray-light);
+      background: var(--white);
+      color: var(--text-muted);
       font-size: 0.9rem;
       padding: 10px 18px;
       border-radius: 50px;
-      border: 1px solid #333;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
-    .hero-counter strong { color: var(--yellow); font-size: 1.1rem; }
+    .hero-counter strong { color: var(--orange); font-size: 1.1rem; }
     .hero-image {
       margin-top: 48px;
       border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      border: 1px solid #333;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+      border: 1px solid var(--border);
       max-width: 800px;
       margin-left: auto;
       margin-right: auto;
@@ -172,7 +216,7 @@
     }
 
     /* ========== PROBLEMA ========== */
-    .problema { background: var(--black-soft); }
+    .problema { background: var(--bg-soft); }
     .dores {
       display: grid;
       grid-template-columns: 1fr;
@@ -182,27 +226,28 @@
       .dores { grid-template-columns: repeat(3, 1fr); }
     }
     .dor-card {
-      background: var(--black-card);
-      border: 1px solid #333;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
       border-radius: 12px;
       padding: 28px 22px;
       text-align: center;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
     }
-    .dor-card:hover { border-color: var(--yellow); }
+    .dor-card:hover { border-color: var(--orange); box-shadow: 0 4px 16px rgba(234,88,12,0.15); }
     .dor-icon {
-      color: var(--yellow);
+      color: var(--orange);
       margin-bottom: 14px;
       display: flex;
       justify-content: center;
     }
     .dor-card h3 {
-      color: var(--white);
+      color: var(--text);
       font-size: 1.1rem;
       margin-bottom: 10px;
     }
     .dor-card p {
-      color: var(--gray);
+      color: var(--text-muted);
       font-size: 0.95rem;
     }
 
@@ -218,11 +263,11 @@
     }
     .solucao-text h2 {
       font-size: clamp(1.5rem, 4vw, 2rem);
-      color: var(--white);
+      color: var(--text);
       margin-bottom: 16px;
     }
     .solucao-text > p {
-      color: var(--gray);
+      color: var(--text-muted);
       margin-bottom: 24px;
       font-size: 1.05rem;
     }
@@ -235,8 +280,8 @@
       flex-shrink: 0;
       width: 36px;
       height: 36px;
-      background: rgba(251,191,36,0.15);
-      color: var(--yellow);
+      background: var(--orange-light);
+      color: var(--orange);
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -244,19 +289,19 @@
       font-size: 1.1rem;
     }
     .beneficio h4 {
-      color: var(--white);
+      color: var(--text);
       font-size: 1rem;
       margin-bottom: 4px;
     }
     .beneficio p {
-      color: var(--gray);
+      color: var(--text-muted);
       font-size: 0.9rem;
     }
     .solucao-image {
       border-radius: 14px;
       overflow: hidden;
-      border: 1px solid #333;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
     }
     .solucao-image img {
       width: 100%;
@@ -266,15 +311,15 @@
     }
 
     /* ========== VÍDEO ========== */
-    .video-section { background: var(--black-soft); }
+    .video-section { background: var(--bg-soft); }
     .video-wrapper {
       position: relative;
       padding-bottom: 56.25%;
       height: 0;
       overflow: hidden;
       border-radius: 14px;
-      border: 1px solid #333;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
       max-width: 800px;
       margin: 0 auto;
       background: #000;
@@ -308,12 +353,12 @@
       position: absolute;
       width: 72px;
       height: 72px;
-      background: var(--yellow);
+      background: var(--orange);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 20px rgba(251,191,36,0.5);
+      box-shadow: 0 4px 20px rgba(234,88,12,0.45);
       transition: transform 0.2s;
     }
     .video-thumb:hover .play-overlay {
@@ -321,7 +366,7 @@
     }
     .video-thumb .play-overlay svg {
       margin-left: 4px;
-      color: #0d0d0d;
+      color: var(--white);
     }
 
     /* ========== PROVA SOCIAL ========== */
@@ -334,21 +379,22 @@
       .depoimentos-grid { grid-template-columns: repeat(3, 1fr); }
     }
     .depoimento-card {
-      background: var(--black-card);
-      border: 1px solid #333;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
       border-radius: 14px;
       padding: 28px 22px;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
     }
     .depoimento-card .stars {
-      color: var(--yellow);
+      color: var(--orange);
       display: flex;
       gap: 2px;
       margin-bottom: 14px;
     }
     .depoimento-card .texto {
-      color: var(--gray-light);
+      color: var(--text-muted);
       font-size: 0.95rem;
       flex-grow: 1;
       margin-bottom: 20px;
@@ -364,20 +410,20 @@
       height: 44px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--yellow);
+      border: 2px solid var(--orange);
     }
     .depoimento-autor .nome {
-      color: var(--white);
+      color: var(--text);
       font-weight: 600;
       font-size: 0.95rem;
     }
     .depoimento-autor .cidade {
-      color: var(--gray);
+      color: var(--text-muted);
       font-size: 0.8rem;
     }
 
     /* ========== GALERIA DE FOTOS ========== */
-    .galeria { background: var(--black-soft); }
+    .galeria { background: var(--bg-soft); }
     .fotos-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -389,7 +435,7 @@
     .foto-item {
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid #333;
+      border: 1px solid var(--border);
       aspect-ratio: 1;
     }
     .foto-item img {
@@ -400,26 +446,232 @@
     }
     .foto-item:hover img { transform: scale(1.05); }
 
+    /* ========== SERVIÇOS + FILTRO ========== */
+    .servicos-section { background: var(--bg); }
+    .filtros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .filtro-btn {
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 10px 18px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filtro-btn:hover { border-color: var(--orange); background: var(--orange-light); }
+    .filtro-btn.active {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--white);
+    }
+    .servicos-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+    }
+    @media (min-width: 600px) {
+      .servicos-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (min-width: 900px) {
+      .servicos-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .servico-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      cursor: pointer;
+    }
+    .servico-card:hover {
+      border-color: var(--orange);
+      box-shadow: 0 6px 20px rgba(234,88,12,0.15);
+    }
+    .servico-card.hidden { display: none; }
+    .servico-card .servico-cta {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--orange);
+    }
+
+    /* Painel de profissionais */
+    .profissionais-panel {
+      display: none;
+      margin-top: 36px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .profissionais-panel.show { display: block; }
+    .profissionais-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .profissionais-header h3 {
+      font-size: 1.25rem;
+      color: var(--text);
+    }
+    .btn-voltar {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn-voltar:hover { border-color: var(--orange); color: var(--orange); }
+    .profissionais-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    @media (min-width: 700px) {
+      .profissionais-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .pro-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .pro-card-top {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .pro-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--orange-light);
+      color: var(--orange);
+      font-weight: 800;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+      border: 2px solid var(--orange);
+    }
+    .pro-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .pro-info h4 {
+      color: var(--text);
+      font-size: 1.05rem;
+      margin-bottom: 2px;
+    }
+    .pro-info .pro-meta {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+    .pro-info .pro-rating {
+      color: var(--orange);
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+    .pro-horarios {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .horario-chip {
+      background: var(--yellow-light);
+      border: 1px solid var(--yellow);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .horario-chip:hover,
+    .horario-chip.selected {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: var(--white);
+    }
+    .pro-card .btn-solicitar {
+      margin-top: 14px;
+      width: 100%;
+      font-size: 0.9rem;
+      padding: 10px 16px;
+    }
+    .servico-card .servico-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--orange-light);
+      color: var(--orange);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .servico-card h3 {
+      color: var(--text);
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+    .servico-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+    }
+    .servico-card .servico-tag {
+      display: inline-block;
+      background: var(--orange-light);
+      color: var(--orange);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 50px;
+    }
+
     /* ========== FORMULÁRIO ========== */
     .form-section {
-      background: linear-gradient(180deg, #0d0d0d 0%, #1a1808 100%);
+      background: linear-gradient(180deg, var(--bg) 0%, var(--yellow-light) 100%);
     }
     .form-card {
-      background: var(--black-card);
-      border: 1px solid #333;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
       border-radius: 16px;
       padding: 36px 28px;
       max-width: 520px;
       margin: 0 auto;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
     }
     .form-card h2 {
-      color: var(--white);
+      color: var(--text);
       font-size: 1.5rem;
       text-align: center;
       margin-bottom: 8px;
     }
     .form-card .form-sub {
-      color: var(--gray);
+      color: var(--text-muted);
       text-align: center;
       margin-bottom: 28px;
       font-size: 0.95rem;
@@ -429,7 +681,7 @@
     }
     .form-group label {
       display: block;
-      color: var(--gray-light);
+      color: var(--text);
       font-size: 0.9rem;
       font-weight: 600;
       margin-bottom: 6px;
@@ -437,21 +689,21 @@
     .form-group input,
     .form-group textarea {
       width: 100%;
-      background: var(--black);
-      border: 1px solid #444;
+      background: var(--white);
+      border: 1px solid var(--border);
       border-radius: 8px;
       padding: 12px 14px;
-      color: var(--white);
+      color: var(--text);
       font-size: 1rem;
       transition: border-color 0.2s;
     }
     .form-group input:focus,
     .form-group textarea:focus {
       outline: none;
-      border-color: var(--yellow);
+      border-color: var(--orange);
     }
     .form-group textarea { resize: vertical; min-height: 90px; }
-    .form-group .optional { font-weight: 400; color: var(--gray); font-size: 0.8rem; }
+    .form-group .optional { font-weight: 400; color: var(--text-muted); font-size: 0.8rem; }
     .form-submit {
       width: 100%;
       margin-top: 8px;
@@ -460,7 +712,7 @@
     }
     .form-privacy {
       text-align: center;
-      color: var(--gray);
+      color: var(--text-muted);
       font-size: 0.8rem;
       margin-top: 14px;
     }
@@ -474,30 +726,30 @@
     .success-msg .check {
       width: 64px;
       height: 64px;
-      background: rgba(251,191,36,0.15);
+      background: var(--orange-light);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 2rem;
-      color: var(--yellow);
+      color: var(--orange);
       margin: 0 auto 20px;
     }
     .success-msg h3 {
-      color: var(--white);
+      color: var(--text);
       font-size: 1.4rem;
       margin-bottom: 10px;
     }
     .success-msg p {
-      color: var(--gray);
+      color: var(--text-muted);
       font-size: 1rem;
     }
     #leadForm.hide { display: none; }
 
     /* ========== FOOTER ========== */
     footer {
-      background: var(--black);
-      border-top: 1px solid #2a2a2a;
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border);
       padding: 32px 0;
       text-align: center;
     }
@@ -506,13 +758,13 @@
       margin-bottom: 10px;
     }
     footer p {
-      color: var(--gray);
+      color: var(--text-muted);
       font-size: 0.85rem;
     }
     footer .disclaimer {
       margin-top: 12px;
       font-size: 0.75rem;
-      color: #666;
+      color: #9ca3af;
     }
 
     /* ========== RESPONSIVO EXTRA ========== */
@@ -528,10 +780,19 @@
   <!-- ========== HEADER ========== -->
   <header>
     <div class="container header-inner">
-      <a href="#" class="logo">Conecta<span>Local</span></a>
-      <button type="button" class="btn header-cta" onclick="goToWaitlist()">Quero acesso antecipado</button>
+      <a href="#" class="logo" onclick="mostrarAba('cliente'); return false;">Conecta<span>Local</span></a>
+      <div class="header-nav">
+        <div class="tab-nav" role="tablist">
+          <button type="button" class="tab-btn active" id="tab-cliente" role="tab" aria-selected="true" onclick="mostrarAba('cliente')">Encontrar serviço</button>
+          <button type="button" class="tab-btn" id="tab-contratacao" role="tab" aria-selected="false" onclick="mostrarAba('contratacao')">Contratação</button>
+        </div>
+        <button type="button" class="btn header-cta" id="headerCta" onclick="goToWaitlist()">Quero acesso antecipado</button>
+      </div>
     </div>
   </header>
+
+  <!-- ========== ABA: CLIENTE (encontrar serviço) ========== -->
+  <div id="aba-cliente" class="aba-panel active">
 
   <!-- ========== HERO ========== -->
   <section class="hero">
@@ -597,7 +858,7 @@
       <div class="solucao-grid">
         <div class="solucao-text">
           <h2>A solução que sua cidade precisava</h2>
-          <p>O <strong style="color:var(--yellow)">Conecta Local</strong> é a plataforma que conecta moradores a profissionais qualificados da região — com verificação de antecedentes, avaliações reais de vizinhos e pagamento protegido.</p>
+          <p>O <strong style="color:var(--orange)">Conecta Local</strong> é a plataforma que conecta moradores a profissionais qualificados da região — com verificação de antecedentes, avaliações reais de vizinhos e pagamento protegido.</p>
 
           <div class="beneficio">
             <div class="beneficio-icon">
@@ -649,7 +910,7 @@
           </div>
         </div>
       </div>
-      <p style="text-align:center;color:var(--gray);font-size:0.85rem;margin-top:12px;">Clique no play para assistir</p>
+      <p style="text-align:center;color:var(--text-muted);font-size:0.85rem;margin-top:12px;">Clique no play para assistir</p>
     </div>
   </section>
 
@@ -741,6 +1002,115 @@
     </div>
   </section>
 
+  <!-- ========== ESCOLHA DE SERVIÇOS COM FILTRO ========== -->
+  <section class="section servicos-section" id="servicos">
+    <div class="container">
+      <h2 class="section-title">Escolha o serviço que precisa</h2>
+      <p class="section-sub">Filtre por categoria e veja os tipos de trabalho disponíveis na sua região.</p>
+
+      <div class="filtros" id="filtros">
+        <button type="button" class="filtro-btn active" data-filtro="todos" onclick="filtrarServicos('todos')">Todos</button>
+        <button type="button" class="filtro-btn" data-filtro="casa" onclick="filtrarServicos('casa')">Casa e reparos</button>
+        <button type="button" class="filtro-btn" data-filtro="limpeza" onclick="filtrarServicos('limpeza')">Limpeza</button>
+        <button type="button" class="filtro-btn" data-filtro="cuidados" onclick="filtrarServicos('cuidados')">Cuidados</button>
+        <button type="button" class="filtro-btn" data-filtro="digital" onclick="filtrarServicos('digital')">Microtarefas</button>
+      </div>
+
+      <div class="servicos-grid" id="servicosGrid">
+        <div class="servico-card" data-categoria="casa" data-servico="eletricista" onclick="abrirProfissionais('eletricista')">
+          <div class="servico-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <h3>Eletricista</h3>
+          <p>Instalações, reparos e manutenção elétrica residencial com profissionais verificados.</p>
+          <span class="servico-tag">Casa e reparos</span>
+          <div class="servico-cta">Ver profissionais →</div>
+        </div>
+        <div class="servico-card" data-categoria="casa" data-servico="encanador" onclick="abrirProfissionais('encanador')">
+          <div class="servico-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <h3>Encanador</h3>
+          <p>Vazamentos, desentupimentos e instalações hidráulicas com atendimento rápido.</p>
+          <span class="servico-tag">Casa e reparos</span>
+          <div class="servico-cta">Ver profissionais →</div>
+        </div>
+        <div class="servico-card" data-categoria="limpeza" data-servico="diarista" onclick="abrirProfissionais('diarista')">
+          <div class="servico-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+          </div>
+          <h3>Diarista</h3>
+          <p>Limpeza residencial pontual ou recorrente, com avaliações de vizinhos da região.</p>
+          <span class="servico-tag">Limpeza</span>
+          <div class="servico-cta">Ver profissionais →</div>
+        </div>
+        <div class="servico-card" data-categoria="limpeza" data-servico="faxina" onclick="abrirProfissionais('faxina')">
+          <div class="servico-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Faxina completa</h3>
+          <p>Limpeza pesada pós-obra ou mudança, com equipe local de confiança.</p>
+          <span class="servico-tag">Limpeza</span>
+          <div class="servico-cta">Ver profissionais →</div>
+        </div>
+        <div class="servico-card" data-categoria="cuidados" data-servico="baba" onclick="abrirProfissionais('baba')">
+          <div class="servico-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>Babá</h3>
+          <p>Cuidado infantil com profissionais com antecedentes verificados e referências locais.</p>
+          <span class="servico-tag">Cuidados</span>
+          <div class="servico-cta">Ver profissionais →</div>
+        </div>
+        <div class="servico-card" data-categoria="cuidados" data-servico="cuidador" onclick="abrirProfissionais('cuidador')">
+          <div class="servico-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3>Cuidador de idosos</h3>
+          <p>Acompanhamento e apoio diário com profissionais da sua cidade.</p>
+          <span class="servico-tag">Cuidados</span>
+          <div class="servico-cta">Ver profissionais →</div>
+        </div>
+        <div class="servico-card" data-categoria="digital" data-servico="suporte" onclick="abrirProfissionais('suporte')">
+          <div class="servico-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <h3>Suporte técnico</h3>
+          <p>Ajuda com computador, celular e internet — presencial ou remoto.</p>
+          <span class="servico-tag">Microtarefas</span>
+          <div class="servico-cta">Ver profissionais →</div>
+        </div>
+        <div class="servico-card" data-categoria="digital" data-servico="tramites" onclick="abrirProfissionais('tramites')">
+          <div class="servico-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>
+          </div>
+          <h3>Trâmites e documentos</h3>
+          <p>Ajuda com filas, protocolos e pequenos serviços administrativos locais.</p>
+          <span class="servico-tag">Microtarefas</span>
+          <div class="servico-cta">Ver profissionais →</div>
+        </div>
+        <div class="servico-card" data-categoria="casa" data-servico="pintor" onclick="abrirProfissionais('pintor')">
+          <div class="servico-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>
+          </div>
+          <h3>Pintor</h3>
+          <p>Pintura interna e externa com orçamento transparente e profissionais locais.</p>
+          <span class="servico-tag">Casa e reparos</span>
+          <div class="servico-cta">Ver profissionais →</div>
+        </div>
+      </div>
+
+      <!-- Painel de profissionais (aparece ao escolher um serviço) -->
+      <div class="profissionais-panel" id="profissionaisPanel">
+        <div class="profissionais-header">
+          <h3 id="profissionaisTitulo">Profissionais disponíveis</h3>
+          <button type="button" class="btn-voltar" onclick="fecharProfissionais()">← Voltar aos serviços</button>
+        </div>
+        <div class="profissionais-grid" id="profissionaisGrid"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ========== FORMULÁRIO DE CAPTURA ========== -->
   <section class="section form-section" id="cadastro">
     <div class="container">
@@ -784,6 +1154,129 @@
     </div>
   </section>
 
+  </div><!-- fim aba-cliente -->
+
+  <!-- ========== ABA: CONTRATAÇÃO (profissionais) ========== -->
+  <div id="aba-contratacao" class="aba-panel">
+
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">Para profissionais e autônomos</div>
+        <h1>Receba <span>mais clientes</span> na sua região</h1>
+        <p class="hero-sub">
+          Cadastre-se no Conecta Local, mostre seu trabalho e conquiste pedidos de vizinhos que buscam profissionais de confiança — com pagamento seguro.
+        </p>
+        <div class="hero-cta-group">
+          <button type="button" class="btn" onclick="goToWaitlistPro()">
+            Quero me cadastrar
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+          <button type="button" class="btn btn-outline" onclick="document.getElementById('beneficios-pro').scrollIntoView({behavior:'smooth'})">Ver benefícios</button>
+        </div>
+        <div class="hero-counter">
+          <strong>89</strong> profissionais já na lista de interesse
+        </div>
+      </div>
+    </section>
+
+    <section class="section problema" id="beneficios-pro">
+      <div class="container">
+        <h2 class="section-title">Por que se cadastrar?</h2>
+        <p class="section-sub">Pensado para autônomos, prestadores locais e recém-formados da região.</p>
+        <div class="dores">
+          <div class="dor-card">
+            <div class="dor-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+            </div>
+            <h3>Mais clientes locais</h3>
+            <p>Apareça para moradores da sua cidade que estão buscando exatamente o serviço que você oferece.</p>
+          </div>
+          <div class="dor-card">
+            <div class="dor-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3>Selo de confiança</h3>
+            <p>Verificação de documentos e avaliações reais aumentam a chance de ser escolhido.</p>
+          </div>
+          <div class="dor-card">
+            <div class="dor-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><path d="M1 10h22"/></svg>
+            </div>
+            <h3>Pagamento protegido</h3>
+            <p>O valor fica retido e é liberado após a aprovação do serviço. Menos risco de calote.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="como-funciona-pro">
+      <div class="container">
+        <h2 class="section-title">Como funciona a contratação</h2>
+        <p class="section-sub">Do cadastro ao primeiro serviço, em poucos passos.</p>
+        <div class="dores">
+          <div class="dor-card">
+            <div class="dor-icon" style="font-weight:800;font-size:1.4rem;color:var(--orange);">1</div>
+            <h3>Cadastre-se</h3>
+            <p>Informe seus dados, área de atuação e documentos para verificação.</p>
+          </div>
+          <div class="dor-card">
+            <div class="dor-icon" style="font-weight:800;font-size:1.4rem;color:var(--orange);">2</div>
+            <h3>Receba pedidos</h3>
+            <p>Clientes da região solicitam serviços. Você aceita os que fizerem sentido.</p>
+          </div>
+          <div class="dor-card">
+            <div class="dor-icon" style="font-weight:800;font-size:1.4rem;color:var(--orange);">3</div>
+            <h3>Execute e receba</h3>
+            <p>Preste o serviço, o cliente aprova e o pagamento é liberado para você.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section form-section" id="cadastro-pro">
+      <div class="container">
+        <div class="form-card">
+          <form id="leadFormPro">
+            <h2>Lista de espera para profissionais</h2>
+            <p class="form-sub">Seja avisado quando abrirmos cadastros na sua cidade. Grátis.</p>
+
+            <div class="form-group">
+              <label for="nomePro">Seu nome *</label>
+              <input type="text" id="nomePro" name="nomePro" required placeholder="Como podemos te chamar?">
+            </div>
+            <div class="form-group">
+              <label for="emailPro">Seu melhor e-mail *</label>
+              <input type="email" id="emailPro" name="emailPro" required placeholder="seu@email.com">
+            </div>
+            <div class="form-group">
+              <label for="servicoPro">Qual serviço você presta? <span class="optional">(opcional)</span></label>
+              <input type="text" id="servicoPro" name="servicoPro" placeholder="Ex: eletricista, diarista, babá...">
+            </div>
+            <div class="form-group">
+              <label for="cidadePro">Sua cidade <span class="optional">(opcional)</span></label>
+              <input type="text" id="cidadePro" name="cidadePro" placeholder="Ex: Ribeirão Preto - SP">
+            </div>
+
+            <button type="submit" class="btn form-submit">
+              Quero trabalhar pelo Conecta Local
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+            <p class="form-privacy">Seus dados estão seguros. Não enviamos spam.</p>
+          </form>
+
+          <div class="success-msg" id="successMsgPro">
+            <div class="check">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+            </div>
+            <h3>Obrigado! Você está na lista</h3>
+            <p>Avisaremos por e-mail quando o cadastro de profissionais estiver aberto na sua região.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- fim aba-contratacao -->
+
   <!-- ========== FOOTER ========== -->
   <footer>
     <div class="container">
@@ -797,17 +1290,68 @@
   </footer>
 
   <script>
+    /* ========== ABAS ========== */
+    function mostrarAba(nome) {
+      const cliente = document.getElementById('aba-cliente');
+      const contratacao = document.getElementById('aba-contratacao');
+      const tabCliente = document.getElementById('tab-cliente');
+      const tabContratacao = document.getElementById('tab-contratacao');
+      const headerCta = document.getElementById('headerCta');
+
+      if (nome === 'contratacao') {
+        cliente.classList.remove('active');
+        contratacao.classList.add('active');
+        tabCliente.classList.remove('active');
+        tabContratacao.classList.add('active');
+        tabCliente.setAttribute('aria-selected', 'false');
+        tabContratacao.setAttribute('aria-selected', 'true');
+        if (headerCta) {
+          headerCta.textContent = 'Quero me cadastrar';
+          headerCta.onclick = goToWaitlistPro;
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        contratacao.classList.remove('active');
+        cliente.classList.add('active');
+        tabContratacao.classList.remove('active');
+        tabCliente.classList.add('active');
+        tabContratacao.setAttribute('aria-selected', 'false');
+        tabCliente.setAttribute('aria-selected', 'true');
+        if (headerCta) {
+          headerCta.textContent = 'Quero acesso antecipado';
+          headerCta.onclick = goToWaitlist;
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
     /* ========== FUNÇÕES DOS BOTÕES ========== */
     function goToWaitlist() {
-      const section = document.getElementById('cadastro');
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        // Foca no primeiro campo após o scroll
-        setTimeout(() => {
-          const nomeInput = document.getElementById('nome');
-          if (nomeInput) nomeInput.focus();
-        }, 600);
-      }
+      mostrarAba('cliente');
+      setTimeout(function() {
+        const section = document.getElementById('cadastro');
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(function() {
+            const nomeInput = document.getElementById('nome');
+            if (nomeInput) nomeInput.focus();
+          }, 400);
+        }
+      }, 100);
+    }
+
+    function goToWaitlistPro() {
+      mostrarAba('contratacao');
+      setTimeout(function() {
+        const section = document.getElementById('cadastro-pro');
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(function() {
+            const nomeInput = document.getElementById('nomePro');
+            if (nomeInput) nomeInput.focus();
+          }, 400);
+        }
+      }, 100);
     }
 
     function goToHowItWorks() {
@@ -830,6 +1374,175 @@
           referrerpolicy="strict-origin-when-cross-origin">
         </iframe>
       `;
+    }
+
+    function filtrarServicos(categoria) {
+      const cards = document.querySelectorAll('.servico-card');
+      const botoes = document.querySelectorAll('.filtro-btn');
+
+      botoes.forEach(function(btn) {
+        if (btn.getAttribute('data-filtro') === categoria) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+      });
+
+      cards.forEach(function(card) {
+        const cat = card.getAttribute('data-categoria');
+        if (categoria === 'todos' || cat === categoria) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+      fecharProfissionais();
+    }
+
+    /* ========== PROFISSIONAIS POR SERVIÇO (ilustrativo) ========== */
+    var profissionaisPorServico = {
+      eletricista: {
+        titulo: 'Eletricistas disponíveis',
+        lista: [
+          { nome: 'Carlos Mendes', foto: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face', cidade: 'Centro', nota: '4.9', servicos: 48, horarios: ['Hoje 14h', 'Hoje 16h', 'Amanhã 9h', 'Amanhã 15h'] },
+          { nome: 'Roberto Silva', foto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face', cidade: 'Jardim América', nota: '4.8', servicos: 32, horarios: ['Hoje 18h', 'Amanhã 10h', 'Amanhã 14h'] },
+          { nome: 'André Costa', foto: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face', cidade: 'Vila Nova', nota: '4.7', servicos: 21, horarios: ['Amanhã 8h', 'Amanhã 13h', 'Qui 11h'] },
+          { nome: 'Felipe Santos', foto: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&h=150&fit=crop&crop=face', cidade: 'Bela Vista', nota: '5.0', servicos: 15, horarios: ['Hoje 15h', 'Amanhã 9h', 'Amanhã 17h'] }
+        ]
+      },
+      encanador: {
+        titulo: 'Encanadores disponíveis',
+        lista: [
+          { nome: 'João Pereira', foto: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&h=150&fit=crop&crop=face', cidade: 'Centro', nota: '4.9', servicos: 56, horarios: ['Hoje 13h', 'Hoje 17h', 'Amanhã 8h'] },
+          { nome: 'Marcos Oliveira', foto: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face', cidade: 'São José', nota: '4.6', servicos: 29, horarios: ['Amanhã 10h', 'Amanhã 14h', 'Sex 9h'] },
+          { nome: 'Paulo Henrique', foto: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&h=150&fit=crop&crop=face', cidade: 'Industrial', nota: '4.8', servicos: 41, horarios: ['Hoje 16h', 'Amanhã 11h', 'Amanhã 16h'] }
+        ]
+      },
+      diarista: {
+        titulo: 'Diaristas disponíveis',
+        lista: [
+          { nome: 'Maria Aparecida', foto: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face', cidade: 'Centro', nota: '5.0', servicos: 67, horarios: ['Amanhã 8h', 'Amanhã 13h', 'Qui 8h'] },
+          { nome: 'Ana Paula', foto: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face', cidade: 'Jardim das Flores', nota: '4.9', servicos: 44, horarios: ['Hoje 14h', 'Amanhã 9h', 'Sex 8h'] },
+          { nome: 'Juliana Rocha', foto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face', cidade: 'Vila Rica', nota: '4.8', servicos: 38, horarios: ['Amanhã 10h', 'Qui 13h', 'Sáb 8h'] },
+          { nome: 'Sandra Lima', foto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face', cidade: 'Centro', nota: '4.7', servicos: 22, horarios: ['Amanhã 8h', 'Amanhã 15h'] }
+        ]
+      },
+      faxina: {
+        titulo: 'Profissionais de faxina',
+        lista: [
+          { nome: 'Equipe Limpa Já', foto: 'https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=150&h=150&fit=crop&crop=faces', cidade: 'Toda a cidade', nota: '4.9', servicos: 90, horarios: ['Amanhã 8h', 'Qui 8h', 'Sáb 7h'] },
+          { nome: 'Carla Souza', foto: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face', cidade: 'Zona Sul', nota: '4.8', servicos: 35, horarios: ['Amanhã 9h', 'Sex 8h'] },
+          { nome: 'Renata Alves', foto: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face', cidade: 'Zona Norte', nota: '4.7', servicos: 28, horarios: ['Qui 8h', 'Sáb 8h', 'Sáb 14h'] }
+        ]
+      },
+      baba: {
+        titulo: 'Babás disponíveis',
+        lista: [
+          { nome: 'Fernanda Dias', foto: 'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=150&h=150&fit=crop&crop=face', cidade: 'Centro', nota: '5.0', servicos: 52, horarios: ['Hoje 18h', 'Amanhã 8h', 'Amanhã 14h'] },
+          { nome: 'Beatriz Nunes', foto: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?w=150&h=150&fit=crop&crop=face', cidade: 'Jardim Europa', nota: '4.9', servicos: 31, horarios: ['Amanhã 9h', 'Qui 8h', 'Sex 13h'] },
+          { nome: 'Camila Ferreira', foto: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=150&h=150&fit=crop&crop=face', cidade: 'Vila Nova', nota: '4.8', servicos: 19, horarios: ['Amanhã 10h', 'Amanhã 16h', 'Sáb 9h'] }
+        ]
+      },
+      cuidador: {
+        titulo: 'Cuidadores disponíveis',
+        lista: [
+          { nome: 'Helena Martins', foto: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=150&h=150&fit=crop&crop=face', cidade: 'Centro', nota: '4.9', servicos: 40, horarios: ['Amanhã 8h', 'Amanhã 14h', 'Plantão'] },
+          { nome: 'Ricardo Gomes', foto: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=150&h=150&fit=crop&crop=face', cidade: 'São Pedro', nota: '4.8', servicos: 27, horarios: ['Hoje 20h', 'Amanhã 7h', 'Plantão noturno'] },
+          { nome: 'Patrícia Melo', foto: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=150&h=150&fit=crop&crop=face', cidade: 'Bela Vista', nota: '5.0', servicos: 33, horarios: ['Amanhã 9h', 'Qui 8h', 'Sex 8h'] }
+        ]
+      },
+      suporte: {
+        titulo: 'Suporte técnico disponível',
+        lista: [
+          { nome: 'Lucas Tech', foto: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&h=150&fit=crop&crop=face', cidade: 'Centro / Remoto', nota: '4.9', servicos: 61, horarios: ['Hoje 15h', 'Hoje 17h', 'Amanhã 10h'] },
+          { nome: 'Diego Ramos', foto: 'https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=150&h=150&fit=crop&crop=face', cidade: 'Remoto', nota: '4.7', servicos: 24, horarios: ['Hoje 14h', 'Amanhã 9h', 'Amanhã 16h'] },
+          { nome: 'Bruno IT', foto: 'https://images.unsplash.com/photo-1488161622733-d0b0a2b0b5c2?w=150&h=150&fit=crop&crop=face', cidade: 'Vila Industrial', nota: '4.8', servicos: 18, horarios: ['Amanhã 11h', 'Qui 14h'] }
+        ]
+      },
+      tramites: {
+        titulo: 'Ajuda com trâmites',
+        lista: [
+          { nome: 'Sofia Almeida', foto: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face', cidade: 'Centro', nota: '4.9', servicos: 36, horarios: ['Amanhã 9h', 'Amanhã 14h', 'Qui 10h'] },
+          { nome: 'Gabriel Pinto', foto: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=150&h=150&fit=crop&crop=face', cidade: 'Centro', nota: '4.6', servicos: 14, horarios: ['Hoje 16h', 'Amanhã 8h'] },
+          { nome: 'Larissa Campos', foto: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=150&h=150&fit=crop&crop=face', cidade: 'Toda a região', nota: '4.8', servicos: 22, horarios: ['Amanhã 10h', 'Sex 9h'] }
+        ]
+      },
+      pintor: {
+        titulo: 'Pintores disponíveis',
+        lista: [
+          { nome: 'Eduardo Pinturas', foto: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=150&h=150&fit=crop&crop=face', cidade: 'Toda a cidade', nota: '4.9', servicos: 55, horarios: ['Amanhã 8h', 'Qui 8h', 'Sáb 7h'] },
+          { nome: 'Tiago Cores', foto: 'https://images.unsplash.com/photo-1521119989659-a83eee488004?w=150&h=150&fit=crop&crop=face', cidade: 'Zona Leste', nota: '4.7', servicos: 30, horarios: ['Amanhã 9h', 'Sex 8h'] },
+          { nome: 'Wagner Arte', foto: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=150&h=150&fit=crop&crop=face', cidade: 'Centro', nota: '4.8', servicos: 26, horarios: ['Qui 8h', 'Sáb 8h', 'Seg 8h'] }
+        ]
+      }
+    };
+
+    function abrirProfissionais(servicoId) {
+      var dados = profissionaisPorServico[servicoId];
+      if (!dados) return;
+
+      var panel = document.getElementById('profissionaisPanel');
+      var grid = document.getElementById('profissionaisGrid');
+      var titulo = document.getElementById('profissionaisTitulo');
+      var servicosGrid = document.getElementById('servicosGrid');
+      var filtros = document.getElementById('filtros');
+
+      titulo.textContent = dados.titulo;
+      grid.innerHTML = '';
+
+      dados.lista.forEach(function(pro) {
+        var horariosHtml = pro.horarios.map(function(h) {
+          return '<button type="button" class="horario-chip" onclick="selecionarHorario(this)">' + h + '</button>';
+        }).join('');
+
+        var card = document.createElement('div');
+        card.className = 'pro-card';
+        card.innerHTML =
+          '<div class="pro-card-top">' +
+            '<div class="pro-avatar"><img src="' + pro.foto + '" alt="Foto de ' + pro.nome + '" loading="lazy"></div>' +
+            '<div class="pro-info">' +
+              '<h4>' + pro.nome + '</h4>' +
+              '<div class="pro-meta">' + pro.cidade + ' · ' + pro.servicos + ' serviços</div>' +
+              '<div class="pro-rating">★ ' + pro.nota + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:4px;">Horários disponíveis:</div>' +
+          '<div class="pro-horarios">' + horariosHtml + '</div>' +
+          '<button type="button" class="btn btn-solicitar" onclick="solicitarProfissional(\'' + pro.nome.replace(/'/g, "\\'") + '\')">Solicitar este profissional</button>';
+        grid.appendChild(card);
+      });
+
+      if (servicosGrid) servicosGrid.style.display = 'none';
+      if (filtros) filtros.style.display = 'none';
+      panel.classList.add('show');
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function fecharProfissionais() {
+      var panel = document.getElementById('profissionaisPanel');
+      var servicosGrid = document.getElementById('servicosGrid');
+      var filtros = document.getElementById('filtros');
+      if (panel) panel.classList.remove('show');
+      if (servicosGrid) servicosGrid.style.display = '';
+      if (filtros) filtros.style.display = '';
+    }
+
+    function selecionarHorario(btn) {
+      var parent = btn.parentElement;
+      parent.querySelectorAll('.horario-chip').forEach(function(c) { c.classList.remove('selected'); });
+      btn.classList.add('selected');
+    }
+
+    function solicitarProfissional(nome) {
+      // Smoke test: leva para lista de espera com contexto
+      console.log('%c[INTERESSE EM PROFISSIONAL]', 'color:#ea580c;font-weight:bold', nome);
+      goToWaitlist();
+      setTimeout(function() {
+        var campo = document.getElementById('dificuldade');
+        if (campo) {
+          campo.value = 'Gostaria de contratar: ' + nome;
+        }
+      }, 700);
     }
 
     function submitLeadForm(e) {
@@ -911,6 +1624,38 @@
 
     /* ========== FORMULÁRIO DE LEAD ========== */
     document.getElementById('leadForm').addEventListener('submit', submitLeadForm);
+
+    document.getElementById('leadFormPro').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nome = document.getElementById('nomePro').value.trim();
+      const email = document.getElementById('emailPro').value.trim();
+      const servico = document.getElementById('servicoPro').value.trim();
+      const cidade = document.getElementById('cidadePro').value.trim();
+      if (!nome || !email) return;
+
+      const lead = {
+        tipo: 'profissional',
+        nome: nome,
+        email: email,
+        servico: servico,
+        cidade: cidade,
+        timestamp: new Date().toISOString(),
+        origem: 'landing-conecta-local-contratacao'
+      };
+
+      const leads = JSON.parse(localStorage.getItem('conecta_leads') || '[]');
+      leads.push(lead);
+      localStorage.setItem('conecta_leads', JSON.stringify(leads));
+      console.log('%c[LEAD PROFISSIONAL]', 'color:#ea580c;font-weight:bold', lead);
+
+      /*
+        AQUI ENTRARIA A INTEGRAÇÃO REAL COM banco / e-mail marketing / planilha
+      */
+
+      document.getElementById('leadFormPro').classList.add('hide');
+      document.getElementById('successMsgPro').classList.add('show');
+      document.getElementById('cadastro-pro').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
   </script>
 </body>
 </html>
